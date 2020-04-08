@@ -7,14 +7,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "tailwindcss/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "tailwindcss"
+  spec.name          = "tailwindcss-rails"
   spec.version       = Tailwindcss::VERSION
   spec.authors       = ["Abraham Kuri"]
   spec.email         = ["kurenn@icalialabs.com"]
 
   spec.summary       = %q{ Tailwind CSS Rails Integration + Webpacker }
   spec.description = %q{ Tailwind CSS Rails Integration + Webpacker }
-  spec.homepage      = "https://github.com/IcaliaLabs/tailwindcss-rails"
+  spec.homepage      = "https://github.com/jmscholen/tailwindcss-rails"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 
-  spec.add_dependency("railties", ">= 4.1.0", "<= 6.1")
+  spec.add_dependency("railties", ">= 4.1.0")
 end
