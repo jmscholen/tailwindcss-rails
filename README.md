@@ -27,16 +27,13 @@ You first need to add the following gems to your `Gemfile`:
 
 ```
 # Gemfile
-gem 'webpacker', '~> 4.0.0'
-gem 'tailwindcss', '~> 1.0.0'
+gem 'tailwindcss', '~> 1.2.0'
 ```
 
 Run the following:
 
 ```shell
 bundle
-
-bundle exec rails webpacker:install
 
 bundle exec rails g tailwindcss:install
 ```
