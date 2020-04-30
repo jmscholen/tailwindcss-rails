@@ -19,7 +19,7 @@ module Tailwindcss
 
       def setup_directories
         run "mkdir -p app/javascript/stylesheets"
-        run "mv app/assets/stylesheets/application.css javascript/stylesheets/application.scss"
+        run "mv app/assets/stylesheets/application.css app/javascript/stylesheets/application.scss"
       end
 
       def add_alpine_library
