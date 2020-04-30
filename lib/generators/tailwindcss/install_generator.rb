@@ -11,13 +11,24 @@ module Tailwindcss
         run "yarn --ignore-engines add tailwindcss@1.2.0 --tilde"
       end
 
-      def init_tailwindcss
+      def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
+        inject_into_file "./tailwind.config.js", '    require("@tailwindcss/ui"),\n', after: "plugins: ["
+        inject_into_file "./tailwind.config.js", "        sans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "fontFamily: {\n"
+      end
+
+      def setup_directories
+        run "mkdir -p app/javascript/stylesheets"
+        run "mv app/assets/stylesheets/application.css javascript/stylesheets/application.scss"
+      end
+
+      def add_alpine_library
+        inject_into_file "app/view/layouts/application.html.erb", '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
       end
 
       def setup_tailwindcss
         template "tailwind.css", "app/javascript/css/application.css"
-        append_to_file "app/javascript/packs/application.js", 'import "../css/application.css"'
+        append_to_file "app/javascript/packs/application.js", 'import "/stylesheets/application.scss"'
       end
 
       def configure_postcssrc
