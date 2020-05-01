@@ -13,7 +13,7 @@ module Tailwindcss
 
       def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
-        inject_into_file "./tailwind.config.js", '    require("@tailwindcss/ui"),\n', after: "plugins: ["
+        inject_into_file "./tailwind.config.js", "    require('@tailwindcss/ui'),\n", after: "plugins: ["
         inject_into_file "./tailwind.config.js", "        sans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "fontFamily: {\n"
       end
 
