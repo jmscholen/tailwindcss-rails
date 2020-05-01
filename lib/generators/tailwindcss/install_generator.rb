@@ -17,10 +17,10 @@ module Tailwindcss
         inject_into_file "./tailwind.config.js", "        sans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "fontFamily: {\n"
       end
 
-      def setup_directories
-        run "mkdir -p app/javascript/stylesheets"
-        run "mv app/assets/stylesheets/application.css app/javascript/stylesheets/application.scss"
-      end
+      #def setup_directories
+        #run "mkdir -p app/javascript/stylesheets"
+        #run "mv app/assets/stylesheets/application.css app/javascript/stylesheets/application.scss"
+      #end
 
       def add_alpine_library
         inject_into_file "app/views/layouts/application.html.erb", '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
