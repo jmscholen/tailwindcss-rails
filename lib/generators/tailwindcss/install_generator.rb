@@ -23,12 +23,12 @@ module Tailwindcss
       end
 
       def add_alpine_library
-        inject_into_file "app/view/layouts/application.html.erb", '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
+        inject_into_file "app/views/layouts/application.html.erb", '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
       end
 
       def setup_tailwindcss
         template "tailwind.css", "app/javascript/stylesheets/application.scss"
-        append_to_file "app/javascript/packs/application.js", 'import "/stylesheets/application.scss"'
+        append_to_file "app/javascript/packs/application.js", "import '/stylesheets/application.scss'"
       end
 
       def configure_postcssrc
