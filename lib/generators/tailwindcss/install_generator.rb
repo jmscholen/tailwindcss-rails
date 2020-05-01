@@ -13,8 +13,9 @@ module Tailwindcss
 
       def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
-        inject_into_file "./tailwind.config.js", "require('@tailwindcss/ui'),\n", after: "plugins: ["
-        inject_into_file "./tailwind.config.js", "  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "extend: {\n"
+        prepend_to_file  "./tailwind.config.js", "const defaultTheme = require('tailwindcss/defaultTheme');\n\n"
+        inject_into_file "./tailwind.config.js", "  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n}", after: "extend: {\n"
+        inject_into_file "./tailwind.config.js", "  require('@tailwindcss/ui'),\n", after: "plugins: [\n"
       end
 
       #def setup_directories
@@ -29,6 +30,7 @@ module Tailwindcss
       def setup_tailwindcss
         template "tailwind.css", "app/javascript/stylesheets/application.scss"
         append_to_file "app/javascript/packs/application.js", 'import "/stylesheets/application.scss"'
+        run "rm -rf app/assets/stylesheets/application.css"
       end
 
       def configure_postcssrc
