@@ -14,14 +14,9 @@ module Tailwindcss
       def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
         prepend_to_file  "./tailwind.config.js", "const defaultTheme = require('tailwindcss/defaultTheme');\n\n"
-        inject_into_file "./tailwind.config.js", "  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n}", after: "extend: {\n"
-        inject_into_file "./tailwind.config.js", "  require('@tailwindcss/ui'),\n", after: "plugins: [\n"
+        inject_into_file "./tailwind.config.js", "\n  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n}", after: "extend: {"
+        inject_into_file "./tailwind.config.js", "\n  require('@tailwindcss/ui'),\n", after: "plugins: ["
       end
-
-      #def setup_directories
-        #run "mkdir -p app/javascript/stylesheets"
-        #run "mv app/assets/stylesheets/application.css app/javascript/stylesheets/application.scss"
-      #end
 
       def add_alpine_library
         inject_into_file "app/views/layouts/application.html.erb", '    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
