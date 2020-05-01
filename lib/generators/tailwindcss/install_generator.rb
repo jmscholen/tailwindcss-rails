@@ -13,8 +13,8 @@ module Tailwindcss
 
       def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
-        inject_into_file "./tailwind.config.js", "    require('@tailwindcss/ui'),\n", after: "plugins: ["
-        inject_into_file "./tailwind.config.js", "        sans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "fontFamily: {\n"
+        inject_into_file "./tailwind.config.js", "require('@tailwindcss/ui'),\n", after: "plugins: ["
+        inject_into_file "./tailwind.config.js", "  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n", after: "extend: {\n"
       end
 
       #def setup_directories
@@ -23,12 +23,12 @@ module Tailwindcss
       #end
 
       def add_alpine_library
-        inject_into_file "app/views/layouts/application.html.erb", '<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
+        inject_into_file "app/views/layouts/application.html.erb", '    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
       end
 
       def setup_tailwindcss
         template "tailwind.css", "app/javascript/stylesheets/application.scss"
-        append_to_file "app/javascript/packs/application.js", "import '/stylesheets/application.scss'"
+        append_to_file "app/javascript/packs/application.js", 'import "/stylesheets/application.scss"'
       end
 
       def configure_postcssrc
