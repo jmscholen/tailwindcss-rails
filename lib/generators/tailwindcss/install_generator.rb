@@ -19,7 +19,7 @@ module Tailwindcss
       end
 
       def update_application_layout
-        gsub_file "app/views/layouts/application.html.erb", /stylesheets_link_tag/, "stylesheets_pack_tag"
+        gsub_file "app/views/layouts/application.html.erb", /stylesheet_link_tag/, "stylesheet_pack_tag"
         inject_into_file "app/views/layouts/application.html.erb", '    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
       end
 
