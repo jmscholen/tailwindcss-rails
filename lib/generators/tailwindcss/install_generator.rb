@@ -8,17 +8,18 @@ module Tailwindcss
       source_root File.expand_path("../../templates", __FILE__)
 
       def yarn_add_tailwindcss
-        run "yarn --ignore-engines add tailwindcss@1.4.0 @tailwindcss/ui --tilde"
+        run "yarn --ignore-engines add tailwindcss@1.4 @tailwindcss/ui --tilde"
       end
 
       def init_tailwindcss_and_add_tailwindui
         run "./node_modules/.bin/tailwind init ./tailwind.config.js"
         prepend_to_file  "./tailwind.config.js", "const defaultTheme = require('tailwindcss/defaultTheme');\n\n"
-        inject_into_file "./tailwind.config.js", "\n  fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n}", after: "extend: {"
-        inject_into_file "./tailwind.config.js", "\n  require('@tailwindcss/ui'),\n", after: "plugins: ["
+        inject_into_file "./tailwind.config.js", "\n      fontFamily: {\nsans: ['Inter var', ...defaultTheme.fontFamily.sans],\n}", after: "extend: {"
+        inject_into_file "./tailwind.config.js", "\n    require('@tailwindcss/ui'),\n", after: "plugins: ["
       end
 
-      def add_alpine_library
+      def update_application_layout
+        gsub_file "app/views/layouts/application.html.erb", /stylesheets_link_tag/, "stylesheets_pack_tag"
         inject_into_file "app/views/layouts/application.html.erb", '    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>', after: "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>\n"
       end
 
