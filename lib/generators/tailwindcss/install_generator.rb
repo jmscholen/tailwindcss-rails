@@ -25,7 +25,7 @@ module Tailwindcss
 
       def setup_tailwindcss
         template "tailwind.css", "app/javascript/stylesheets/application.scss"
-        append_to_file "app/javascript/packs/application.js", 'import "/stylesheets/application.scss"'
+        append_to_file "app/javascript/packs/application.js", 'import "stylesheets/application.scss"'
         run "rm -rf app/assets/stylesheets/application.css"
       end
 
